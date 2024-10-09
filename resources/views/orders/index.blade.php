@@ -1,8 +1,43 @@
-
-@extends('layouts.app')
-
+@extends('layout.app')
 @section('content')
-<div class="container">
+
+
+<div class="row">
+              <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                  <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">All Orders <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    </h4>
+                    <h2 class="mb-5">$ 15,0000</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                  <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">Weekly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                    </h4>
+                    <h2 class="mb-5">45,6334</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                  <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">Today orders <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                    </h4>
+                    <h2 class="mb-5">95,5741</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+<!-- <div class="container">
 
     <h1>Orders List</h1>
     <a href="{{ route('products.create') }}" class="btn btn-success" style="margin : 10px;">Add Product</a>
@@ -37,66 +72,7 @@
             @endforeach
         </tbody>
     </table>
-</div>
+</div> -->
 
 @endsection('content');
 
-
-
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card text-white bg-danger mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Total Orders</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-info mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Total Amount</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-success mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Daily Total Amount</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card mt-4">
-        <div class="card-body">
-            <h4>Orders</h4>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Order Date</th>
-                        <th>Total Amount</th>
-                        <th>User ID</th>
-                        <th>Operation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($orders as $order)
-                    <tr>
-                        <td>{{ $order->order_id }}</td>
-                        <td>{{ $order->order_date }}</td>
-                        <td>{{ $order->order_total_amount }}</td>
-                        <td>{{ $order->user_id }}</td>
-                        <td>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-@endsection

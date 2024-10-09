@@ -1,5 +1,7 @@
-@extends('layouts.app')
-
+@extends('layout.app')
 @section('content')
-    <!-- محتوى الصفحة هنا -->
-@endsection
+
+
+
+
+@endsection('content');

@@ -16,6 +16,13 @@ Route::resource('product-images', ProductImageController::class);
 Route::resource('feedbacks', FeedbackController::class);
 Route::resource('ratings', RatingController::class);
 
-Route::get('/', function () {
+
+
+
+Route::get('/dashboard', function () {
     return view('dashboard.home');
+});
+
+Route::get('/', function () {
+    return view('home');
 });

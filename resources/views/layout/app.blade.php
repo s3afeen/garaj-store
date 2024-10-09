@@ -6,23 +6,23 @@
   </head>
   <body>
     <div class="container-scroller">
-     
-      <!-- partial:partials/_navbar.html -->
+
+      <!--navbar-->
     @include('layout.include.nav')
 
-     
+
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
+        <!--sidebar-->
     @include('layout.include.side')
 
-      
+
         <!-- partial -->
         <div class="main-panel">
           @yield('content')
-         
+
           <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
+          <!--footer-->
           @include('layout.include.footer')
 
           <!-- partial -->
@@ -35,7 +35,7 @@
     <!-- plugins:js -->
     @include('layout.include.bottom')
 
-    
+
     <!-- End custom js for this page -->
   </body>
 </html>

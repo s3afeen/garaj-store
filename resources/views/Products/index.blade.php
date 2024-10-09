@@ -1,42 +1,19 @@
-@extends('layouts.app')
-
-@section('title', 'Products')
-
+@extends('layout.app')
 @section('content')
-<div class="container">
-    <h1>Product List</h1>
-    <a href="{{ route('products.create') }}" class="btn btn-success" style="margin : 10px;">Add Product</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Category_Id</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($products as $product)
-            <tr>
-                <td>{{ $product->id }}</td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->description }}</td>
-                <td>{{ $product->price }}</td>
-                <td>{{ $product->category_Id }}</td>
 
-                <td>
-                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-@endsection
+<div class="row">
+              <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                  <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">Product Count <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                    </h4>
+                    <h2 class="mb-5">120</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+@endsection('content');
