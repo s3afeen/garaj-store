@@ -3,7 +3,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="assets/images/faces/face1.jpg" alt="profile">
+                  <img src="{{asset('assets/images/faces/face1.jpg')}}" alt="profile">
                   <span class="login-status online"></span>
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
@@ -14,43 +14,43 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="dashboard">
-                <span class="menu-title">Dashboard</span>
+            <a class="nav-link" href="{{ route('dashboard.home') }}">
+              <span class="menu-title">dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
-              </a>
+            </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="products">
+              <a class="nav-link" href="{{ route('products.index') }}">
                 <span class="menu-title">Product Management</span>
                 <i class="mdi mdi-cart menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="orders">
+              <a class="nav-link" href="{{ route('orders.index') }}">
                 <span class="menu-title">Order Management</span>
                 <i class="mdi mdi-airplane-takeoff menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="users">
+              <a class="nav-link" href="{{ route('users.index') }}">
                 <span class="menu-title">User Management</span>
                 <i class="mdi mdi-account-multiple menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="reports">
+              <a class="nav-link" href="{{ route('reports') }}">
                 <span class="menu-title">Basic Reports</span>
                 <i class="mdi mdi-chart-areaspline menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="category">
+              <a class="nav-link" href="{{ route('category.index') }}">
                 <span class="menu-title">Category Management</span>
                 <i class="mdi mdi-format-align-justify menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="settings">
+              <a class="nav-link" href="{{ route('settings') }}">
                 <span class="menu-title">General Settings</span>
                 <i class="mdi mdi-brightness-5 menu-icon"></i>
               </a>

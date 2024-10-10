@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use Illuminate\Http\Request;
 
+
+use App\Models\Category;
+
 class productController extends Controller
 {
     public function index()
@@ -14,20 +17,25 @@ class productController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all(); 
+        return view('products.create',compact('categories'));
     }
 
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'total' => 'required|numeric',
-            'status' => 'required',
-        ]);
+{
+    // تحقق من صحة البيانات المدخلة
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'price' => 'required|numeric',
+        'category_id' => 'required|exists:categories,id',
+    ]);
 
-        product::create($validatedData);
-        return redirect()->route('products.index')->with('success', 'product created successfully.');
-    }
+    // إضافة المنتج إلى قاعدة البيانات
+    Product::create($validatedData);
+    
+    return redirect()->route('products.index')->with('success', 'Product created successfully.');
+}
 
     public function show($id)
     {
@@ -36,19 +44,29 @@ class productController extends Controller
     }
 
     public function edit($id)
-    {
-        $product = product::findOrFail($id);
-        return view('products.edit', compact('product'));
-    }
+{
+    $product = Product::findOrFail($id);  // جلب المنتج الذي تريد تعديله
+    $categories = Category::all();         // جلب جميع الفئات
+
+    return view('products.edit', compact('product', 'categories')); // تمرير المنتج والفئات إلى واجهة العرض
+}
+
+
 
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'status' => 'required',
-        ]);
+
+        // $validatedData = $request->validate([
+        //     'status' => 'required',
+        // ]);
 
         $product = product::findOrFail($id);
-        $product->update($validatedData);
+       $product->name = $request->name;
+       $product->description = $request->description;
+       $product->price = $request->price;
+       $product->category_id = $request->category_id;
+       $product->save();
+
         return redirect()->route('products.index')->with('success', 'product updated successfully.');
     }
 

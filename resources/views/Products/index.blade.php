@@ -2,18 +2,50 @@
 @section('content')
 
 
-<div class="row">
-              <div class="col-md-4 stretch-card grid-margin">
-                <div class="card bg-gradient-success card-img-holder text-white">
-                  <div class="card-body">
-                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Product Count <i class="mdi mdi-diamond mdi-24px float-right"></i>
-                    </h4>
-                    <h2 class="mb-5">120</h2>
-                  </div>
-                </div>
-              </div>
-            </div>
+<div class="card-body">
+    <h4 class="card-title">Product Management</h4>
+    <p class="card-description"> Add class <code>.table-bordered</code></p>
+    
+    <!-- زر لإضافة منتج جديد -->
+    <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Add New Product</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th> # </th>
+                <th> Product Name </th>
+                <th> Description </th>
+                <th> Price </th>
+                <th> Category </th>
+                <th> Created At </th>
+                <th> Actions </th> <!-- عمود لإضافة الأزرار -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($products as $product)
+            <tr>
+                <td> {{ $product->id }} </td>
+                <td>
+                    <a href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
+                </td>
+                <td> {{ $product->description }} </td>
+                <td> ${{ number_format($product->price, 2) }} </td>
+                <td> {{ $product->category->name ?? 'N/A' }} </td> <!-- عرض اسم الفئة أو N/A إن لم توجد -->
+                <td> {{ $product->created_at->format('M d, Y') }} </td>
+                <td>
+                    <!-- أزرار الإجراءات -->
+                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 
 @endsection('content');
