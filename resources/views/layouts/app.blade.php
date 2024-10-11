@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'MasterPeas')</title>
-    
+
     <!-- إضافة Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- إضافة ملفات CSS الخاصة بك هنا -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
@@ -28,7 +28,7 @@
                     <a class="nav-link" href="products">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categories</a>
+                    <a class="nav-link" href="categories">Categories</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="orders">Orders</a>

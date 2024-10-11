@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -14,7 +15,8 @@ class OrderController extends Controller
 
     public function create()
     {
-        return view('orders.create');
+        $users = User::all();
+        return view('orders.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -58,5 +60,6 @@ class OrderController extends Controller
         $order->delete();
         return redirect()->route('orders.index')->with('success', 'Order deleted successfully.');
     }
+
 }
 

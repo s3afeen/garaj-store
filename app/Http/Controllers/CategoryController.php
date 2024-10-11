@@ -11,17 +11,17 @@ class CategoryController extends Controller
     public function index()
     {
         // Get all Categories from the database
-        $Categories = Category::all();
+        $categories = Category::all();
 
         // Return view with Categories
-        return view('Categories.index', compact('Categories'));
+        return view('categories.index', compact('categories'));
     }
 
     // Show the form for creating a new resource.
     public function create()
     {
         // Return view to create a new category
-        return view('Categories.create');
+        return view('categories.create');
     }
 
     // Store a newly created resource in storage.
@@ -36,21 +36,21 @@ class CategoryController extends Controller
         Category::create($request->all());
 
         // Redirect to Categories index with success message
-        return redirect()->route('Categories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     // Display the specified resource.
     public function show(Category $category)
     {
         // Return view with category details
-        return view('Categories.show', compact('category'));
+        return view('categories.show', compact('category'));
     }
 
     // Show the form for editing the specified resource.
     public function edit(Category $category)
     {
         // Return view to edit the category
-        return view('Categories.edit', compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     // Update the specified resource in storage.
@@ -65,7 +65,7 @@ class CategoryController extends Controller
         $category->update($request->all());
 
         // Redirect to Categories index with success message
-        return redirect()->route('Categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     // Remove the specified resource from storage.
@@ -75,6 +75,6 @@ class CategoryController extends Controller
         $category->delete();
 
         // Redirect to Categories index with success message
-        return redirect()->route('Categories.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }

@@ -20,7 +20,7 @@ Route::resource('product-images', ProductImageController::class);
 Route::resource('feedbacks', FeedbackController::class);
 Route::resource('ratings', RatingController::class);
 Route::resource('users', UserController::class);
-Route::resource('category', CategoryController::class);
+Route::resource('categories', CategoryController::class);
 
 
 
