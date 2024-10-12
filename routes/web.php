@@ -10,7 +10,9 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\SettingsController;
 
 
 Route::resource('orders', OrderController::class);
@@ -34,6 +36,10 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.home');
-Route::get('/reports', [DashboardController::class, 'index'])->name('reports');
-Route::get('/settings', [DashboardController::class, 'index'])->name('settings');
+//Route::get('/reports', [DashboardController::class, 'index'])->name('reports');//---------
+// Route::get('/settings', [DashboardController::class, 'index'])->name('settings');------------------
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');//-------
+Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
+Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
+Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');
 

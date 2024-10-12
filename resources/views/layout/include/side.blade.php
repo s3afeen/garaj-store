@@ -15,7 +15,7 @@
             </li>
             <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard.home') }}">
-              <span class="menu-title">dashboard</span>
+              <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
             </li>
@@ -38,7 +38,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('reports') }}">
+              <a class="nav-link" href="{{ route('reports.index') }}">
                 <span class="menu-title">Basic Reports</span>
                 <i class="mdi mdi-chart-areaspline menu-icon"></i>
               </a>
@@ -50,7 +50,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('settings') }}">
+              <a class="nav-link" href="{{ route('settings.index') }}">
                 <span class="menu-title">General Settings</span>
                 <i class="mdi mdi-brightness-5 menu-icon"></i>
               </a>

@@ -2,31 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    // 1. عرض جميع المستخدمين
     public function index()
     {
-        $users = User::all(); // جلب جميع المستخدمين من قاعدة البيانات
-        return view('users.index', compact('users')); // عرضهم في صفحة users/index.blade.php
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 
-    // 2. عرض نموذج إنشاء مستخدم جديد
     public function create()
-    {
-        return view('users.create'); // يعرض نموذج لإنشاء مستخدم جديد
-    }
+{
+    $users = User::all();
+    return view('users.create', compact('users'));
+}
 
-    // 3. تخزين بيانات المستخدم الجديد في قاعدة البيانات
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|confirmed|min:6',
         ]);
 
         User::create([
