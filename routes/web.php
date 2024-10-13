@@ -32,7 +32,7 @@ Route::resource('product-images', ProductImageController::class);
 Route::resource('feedbacks', FeedbackController::class);
 Route::resource('ratings', RatingController::class);
 Route::resource('users', UserController::class);
-Route::resource('categories', CategoryController::class);
+Route::resource('/categories', CategoryController::class);
 
 
 
@@ -64,3 +64,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
