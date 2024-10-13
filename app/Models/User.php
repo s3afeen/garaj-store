@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable; //gmail
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Scout\Searchable;
+use Laravel\Scout\Attributes\SearchUsingPrefix;
 
 class User extends Authenticatable // تعديل هنا
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Searchable ;
 
     protected $fillable = [
         'name',
@@ -53,5 +55,17 @@ class User extends Authenticatable // تعديل هنا
     public function feedbacks()
     {
         return $this->hasMany(Feedback::class);
+    }
+
+    #[SearshUsingPrefix(['status'])]
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'is_admin' => $this->is_admin,
+
+        ];   
     }
 }

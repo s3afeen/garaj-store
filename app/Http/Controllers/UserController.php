@@ -11,14 +11,23 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.index', compact('users'));
+
+        
+        if($sarsh_param)
+        {
+            $users_query = User::searsh($searsh_param);
+        }
+
+        $users = $users_query->get();
+
+        return view('users.index', compact('users', 'sarsh_param'));
     }
 
     public function create()
-{
-    $users = User::all();
-    return view('users.create', compact('users'));
-}
+    {
+        $users = User::all();
+        return view('users.create', compact('users'));
+    }
 
 public function store(Request $request)
 {
