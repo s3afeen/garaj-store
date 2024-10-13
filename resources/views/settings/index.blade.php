@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -48,14 +48,9 @@
             <input type="url" name="twitter" id="twitter" class="form-control" value="{{ $settings['twitter'] ?? '' }}">
         </div>
 
-        <!-- إعدادات الأمان -->
-        <div class="form-group">
-            <label for="security_question">Security Question</label>
-            <input type="text" name="security_question" id="security_question" class="form-control" value="{{ $settings['security_question'] ?? '' }}">
-        </div>
-
         <!-- زر الحفظ -->
         <button type="submit" class="btn btn-primary">Save Settings</button>
+
     </form>
 </div>
 @endsection

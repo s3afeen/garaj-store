@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
 
 <div class="container-fluid mt-5">
@@ -8,7 +8,7 @@
             <form action="{{ route('products.update', $product->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                
+
                 <!-- حقل اسم المنتج -->
                 <div class="form-group mb-3">
                     <label for="productName">Product Name</label>

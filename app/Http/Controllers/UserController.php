@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,22 +20,22 @@ class UserController extends Controller
     return view('users.create', compact('users'));
 }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|confirmed|min:6',
+    ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password), // استخدم Hash::make
+    ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
-    }
+    return redirect()->route('users.index')->with('success', 'User created successfully.');
+}
 
     // 4. عرض تفاصيل مستخدم معين
     public function show($id)
@@ -52,25 +53,25 @@ class UserController extends Controller
 
     // 6. تحديث بيانات المستخدم في قاعدة البيانات
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|min:6',
-        ]);
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'password' => 'nullable|min:6',
+    ]);
 
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
+    $user = User::findOrFail($id);
+    $user->name = $request->name;
+    $user->email = $request->email;
 
-        if ($request->filled('password')) {
-            $user->password = bcrypt($request->password);
-        }
-
-        $user->save();
-
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->password); // استخدم Hash::make
     }
+
+    $user->save();
+
+    return redirect()->route('users.index')->with('success', 'User updated successfully.');
+}
 
     // 7. حذف مستخدم معين
     public function destroy($id)

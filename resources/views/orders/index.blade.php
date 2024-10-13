@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
 
 
@@ -64,7 +64,7 @@
                 <td> {{ $order->status }} </td>
                 <td> {{ $order->created_at->format('M d, Y H:i') }} </td>
                 <td>
-                    
+
                     <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('orders.destroy', $order->id) }}" method="POST" style="display: inline;">
                         @csrf

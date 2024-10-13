@@ -1,11 +1,11 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
 
 
 <div class="card-body">
     <h4 class="card-title">Product Management</h4>
     <p class="card-description"> Add class <code>.table-bordered</code></p>
-    
+
     <!-- زر لإضافة منتج جديد -->
     <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Add New Product</a>
 
