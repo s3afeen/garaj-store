@@ -8,20 +8,20 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::all();
+    public function index(Request $request)
+{
+    $search_param = $request->input('search_param'); // جلب الباراميتر من الطلب
 
-        
-        if($sarsh_param)
-        {
-            $users_query = User::searsh($searsh_param);
-        }
-
-        $users = $users_query->get();
-
-        return view('users.index', compact('users', 'sarsh_param'));
+    if ($search_param) {
+        $users_query = User::where('name', 'like', '%' . $search_param . '%'); // البحث عن المستخدمين حسب الاسم
+    } else {
+        $users_query = User::query(); // لو ما في باراميتر بحث، استرجع كل المستخدمين
     }
+
+    $users = $users_query->get();
+
+    return view('users.index', compact('users', 'search_param'));
+}
 
     public function create()
     {

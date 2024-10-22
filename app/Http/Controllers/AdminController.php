@@ -2,63 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\User; // Change this to your regular user model
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $admins = Admin::all();
-        return view('admins.index', compact('admins'));
+        $admins = User::all(); // Adjust to your model
+        return view('admin.index', compact('admins'));
     }
 
     public function create()
     {
-        return view('admins.create');
+        return view('admin.create');
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:admins,email',
+            'email' => 'required|email|unique:users,email', // Adjust to your model
             'password' => 'required',
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
-        Admin::create($validatedData);
-        return redirect()->route('admins.index')->with('success', 'Admin created successfully.');
+        User::create($validatedData); // Adjust to your model
+        return redirect()->route('admin.index')->with('success', 'User created successfully.');
     }
 
-    public function show($id)
+    public function show()
     {
-        $admin = Admin::findOrFail($id);
-        return view('admins.show', compact('admin'));
+        $admin = Auth::user(); // استرجاع الأدمن المصادق عليه باستخدام الحارس 'admin'
+        return view('admin.profile', compact('admin')); // تمرير بيانات الأدمن إلى الـ view
     }
 
     public function edit($id)
     {
-        $admin = Admin::findOrFail($id);
-        return view('admins.edit', compact('admin'));
+        $admin = User::findOrFail($id); // Adjust to your model
+        return view('admin.edit', compact('admin'));
     }
 
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:admins,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id, // Adjust to your model
         ]);
 
-        $admin = Admin::findOrFail($id);
+        $admin = User::findOrFail($id); // Adjust to your model
         $admin->update($validatedData);
-        return redirect()->route('admins.index')->with('success', 'Admin updated successfully.');
+        return redirect()->route('admin.index')->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)
     {
-        $admin = Admin::findOrFail($id);
+        $admin = User::findOrFail($id); // Adjust to your model
         $admin->delete();
-        return redirect()->route('admins.index')->with('success', 'Admin deleted successfully.');
+        return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
+    }
+
+    public function showProfile()
+    {
+        $admin = Auth::user(); // Get the current authenticated user
+        return view('admin.profile', compact('admin')); // Pass user data to the view
     }
 }
