@@ -42,6 +42,17 @@ return [
         ],
     ],
 
+
+
+
+
+
+
+    'admin' => [
+        'driver' => 'session',
+        'provider' => 'admins',  // يجب أن يكون لديك provider للأدمن
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -112,4 +123,10 @@ return [
 
     'password_timeout' => 10800,
 
+
+
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class, 
+    ],
 ];

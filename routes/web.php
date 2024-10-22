@@ -15,6 +15,7 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SettingsController;
 // use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -40,8 +41,8 @@ Route::resource('/categories', CategoryController::class);
 
 
 
-Route::get('/home', function () {
-    return view('welcome');
+Route::get('/test', function () {
+    return view('userSide.landing');
 });
 
 
@@ -68,3 +69,7 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->m
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// routes/web.php
+Route::get('/admin-profile', [AdminController::class, 'show'])->name('admin.profile');
