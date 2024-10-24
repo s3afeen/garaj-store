@@ -17,7 +17,7 @@
 
     @yield('content')
 
-    
+
 
     <!-- Footer Start -->
     @include('layouts.masterUserSide.include.footer')

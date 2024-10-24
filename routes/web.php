@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
@@ -13,63 +12,40 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SettingsController;
-// use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
 
 
 
-
-
-
-
-
-
-
-Route::resource('orders', OrderController::class);
-Route::resource('order-details', OrderDetailController::class);
-Route::resource('products', ProductController::class);
-Route::resource('product-images', ProductImageController::class);
-Route::resource('feedbacks', FeedbackController::class);
-Route::resource('ratings', RatingController::class);
-Route::resource('users', UserController::class);
-Route::resource('/categories', CategoryController::class);
-
-
-
-
-
-
-
-Route::get('/test', function () {
-    return view('userSide.landing');
-});
-
-
-// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.home');
-//Route::get('/reports', [DashboardController::class, 'index'])->name('reports');//---------
-// Route::get('/settings', [DashboardController::class, 'index'])->name('settings');------------------
-Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');//-------
-Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
-Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
-Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');
-
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');//(??????????????)
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('orders', OrderController::class);
+    Route::resource('order-details', OrderDetailController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('product-images', ProductImageController::class);
+    Route::resource('feedbacks', FeedbackController::class);
+    Route::resource('ratings', RatingController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('categories', CategoryController::class);
+
+
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
+    Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::get('/admin-profile', [AdminController::class, 'show'])->name('admin.profile');
 });
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-// routes/web.php
-Route::get('/admin-profile', [AdminController::class, 'show'])->name('admin.profile');
+
+Route::get('/', function () { return view('userSide.landing'); });
+Route::get('/home', function () { return view('userSide.landing'); });
+Route::get('/shop', function () { return view('userSide.shop'); });
+Route::get('/contact', function () { return view('userSide.contact'); });

@@ -44,10 +44,10 @@
                         </form>
                         <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
                         <div class="d-flex">
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                            <!-- <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter" target="_blank"></i></a> -->
+                            <!-- <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f" target="_blank"></i></a> -->
+                            <!-- <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in" target="_blank"></i></a> -->
+                            <a class="btn btn-primary btn-square" href="https://www.instagram.com/karajstore.jo/" target="_blank"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -58,11 +58,11 @@
                 <p class="mb-md-0 text-center text-md-left text-secondary">
                     &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
                     by
-                    <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
+                    <a class="text-primary" href="#">Kraj Store</a>
                 </p>
             </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
+            <!-- <div class="col-md-6 px-xl-0 text-center text-md-right">
                 <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
+            </div> -->
         </div>
     </div>
