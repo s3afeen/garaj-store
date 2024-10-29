@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
 {
-    Schema::table('users', function (Blueprint $table) {
-        $table->boolean('is_admin')->default(false); // إضافة الحقل is_admin
-    });
+    if (!Schema::hasColumn('users', 'is_admin')) {
+        $table->boolean('is_admin')->default(0);
+    }
+
+    // Schema::table('users', function (Blueprint $table) {
+    //     $table->boolean('is_admin')->default(0); // إضافة الحقل is_admin
+    // });
 }
 
 

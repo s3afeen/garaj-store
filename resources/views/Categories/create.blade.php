@@ -3,7 +3,7 @@
 
 <div class="card-body">
     <h4 class="card-title">Add New Category</h4>
-    <form action="{{ route('categories.store') }}" method="POST">
+    <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- حقل اسم الفئة -->
         <div class="form-group">
@@ -17,9 +17,18 @@
             <textarea class="form-control" id="categoryDescription" name="description" placeholder="Enter category description" rows="4" required></textarea>
         </div>
 
+
+
+        <div class="form-group">
+            <label for="image">Category Image</label>
+            <input type="file" name="image" class="form-control" id="image">
+        </div>
+
         <!-- زر الإرسال وزر الإلغاء -->
         <button type="submit" class="btn btn-primary">Add Category</button>
         <a href="{{ route('categories.index') }}" class="btn btn-light">Cancel</a>
+
+
     </form>
 </div>
 

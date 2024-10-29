@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('orders', OrderController::class);
     Route::resource('order-details', OrderDetailController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('users', UserController::class);
 
 
     // Route::resource('product-images', ProductImageController::class);
@@ -36,7 +37,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('feedbacks', FeedbackController::class);
     Route::resource('ratings', RatingController::class);
     Route::resource('categories', CategoryController::class);
-    Route::resource('users', UserController::class);
 
 
 
@@ -65,4 +65,4 @@ Route::get('/contact', function () { return view('userSide.contact'); });
 
 
 
-//10/26/2024
+Route::get('/', [CategoryController::class, 'showLandingPage'])->name('landing');

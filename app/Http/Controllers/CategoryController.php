@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class CategoryController extends Controller
 {
@@ -26,18 +28,23 @@ class CategoryController extends Controller
 
     // Store a newly created resource in storage.
     public function store(Request $request)
-    {
-        // Validate the request
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ]);
 
-        // Create new category
-        Category::create($request->all());
+    $data = $request->all();
 
-        // Redirect to Categories index with success message
-        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('category_images', 'public');
     }
+
+    Category::create($data);
+
+    return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+}
+
 
     // Display the specified resource.
     public function show(Category $category)
@@ -56,15 +63,23 @@ class CategoryController extends Controller
     // Update the specified resource in storage.
     public function update(Request $request, Category $category)
     {
-        // Validate the request
         $request->validate([
             'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        // Update the category
-        $category->update($request->all());
+        $data = $request->all();
 
-        // Redirect to Categories index with success message
+        if ($request->hasFile('image')) {
+            // حذف الصورة القديمة
+            if ($category->image) {
+                Storage::disk('public')->delete($category->image);
+            }
+            $data['image'] = $request->file('image')->store('category_images', 'public');
+        }
+
+        $category->update($data);
+
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
@@ -77,4 +92,13 @@ class CategoryController extends Controller
         // Redirect to Categories index with success message
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
+
+
+
+        public function showLandingPage()
+    {
+        $categories = Category::all(); // جلب كل الأصناف
+        return view('userSide.landing', compact('categories'));
+    }
+
 }
