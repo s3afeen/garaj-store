@@ -27,11 +27,16 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('orders', OrderController::class);
     Route::resource('order-details', OrderDetailController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('product-images', ProductImageController::class);
+
+
+    // Route::resource('product-images', ProductImageController::class);
+    // Routeeee::resource('productImagessss', ProductImageController::classsss);
+
+
     Route::resource('feedbacks', FeedbackController::class);
     Route::resource('ratings', RatingController::class);
-    Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('users', UserController::class);
 
 
 
@@ -49,3 +54,15 @@ Route::get('/', function () { return view('userSide.landing'); });
 Route::get('/home', function () { return view('userSide.landing'); });
 Route::get('/shop', function () { return view('userSide.shop'); });
 Route::get('/contact', function () { return view('userSide.contact'); });
+
+
+
+
+
+
+
+
+
+
+
+//10/26/2024

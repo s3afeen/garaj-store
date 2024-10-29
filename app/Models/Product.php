@@ -29,7 +29,7 @@ class Product extends Model
         return $this->hasMany(Rating::class);
     }
 
-    // ................. 
+    // .................
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -40,5 +40,6 @@ class Product extends Model
         'description',
         'price',
         'category_id',
+        'image'
     ];
 }

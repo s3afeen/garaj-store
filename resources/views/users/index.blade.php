@@ -5,7 +5,7 @@
     <h4 class="card-title">Users Management</h4>
     <p class="card-description"> Add class <code>.table-bordered</code></p>
 
-    <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add New Order</a>
+    <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add New User</a>
 
     <table class="table table-bordered">
         <thead>

@@ -5,7 +5,8 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title text-center mb-4">Edit Product</h4>
-            <form action="{{ route('products.update', $product->id) }}" method="POST">
+            <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+
                 @csrf
                 @method('PUT')
 
@@ -39,6 +40,16 @@
                     </select>
                 </div>
 
+                <!-- حقل الصورة -->
+                <div class="form-group mb-4">
+                    <label for="productImage">Product Image</label>
+                    <input type="file" class="form-control-file" id="productImage" name="image_path">
+                    <!-- عرض الصورة الحالية إذا كانت موجودة -->
+                    @if ($product->productImages->isNotEmpty())
+                        <img src="{{ asset('storage/' . $product->productImages->first()->image_path) }}" alt="Product Image" width="100" class="mt-3">
+                    @endif
+                </div>
+
                 <!-- أزرار التحكم -->
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Update Product</button>
@@ -49,7 +60,4 @@
     </div>
 </div>
 
-
-
-
-@endsection('content');
+@endsection

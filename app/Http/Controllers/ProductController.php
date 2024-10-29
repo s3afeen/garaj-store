@@ -1,80 +1,113 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\product;
+use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 
-class productController extends Controller
+class ProductController extends Controller
 {
     public function index()
     {
-        $products = product::all();
+        // جلب جميع المنتجات مع الصور
+        $products = Product::with('productImages')->get();
+
         return view('products.index', compact('products'));
     }
 
     public function create()
-    {
-        $categories = Category::all(); 
-        return view('products.create',compact('categories'));
-    }
+{
+    $categories = Category::all(); // جلب جميع الفئات
+    return view('products.create', compact('categories'));
+}
+
 
     public function store(Request $request)
 {
-    // تحقق من صحة البيانات المدخلة
+    // التحقق من صحة البيانات المدخلة
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'description' => 'required|string',
         'price' => 'required|numeric',
         'category_id' => 'required|exists:categories,id',
+        'image_path' => 'required|image', // التحقق من رفع الصورة
     ]);
 
-    // إضافة المنتج إلى قاعدة البيانات
-    Product::create($validatedData);
-    
-    return redirect()->route('products.index')->with('success', 'Product created successfully.');
-}
+    // إنشاء المنتج
+    $product = Product::create($validatedData);
 
-    public function show($id)
-    {
-        $product = product::findOrFail($id);
-        return view('products.show', compact('product'));
+    // رفع الصورة وتخزينها في مجلد 'public/product_images'
+    if ($request->hasFile('image_path')) {
+        $imagePath = $request->file('image_path')->store('product_images', 'public');
+        ProductImage::create([
+            'product_id' => $product->id,
+            'image_path' => $imagePath,
+        ]);
     }
 
-    public function edit($id)
-{
-    $product = Product::findOrFail($id);  // جلب المنتج الذي تريد تعديله
-    $categories = Category::all();         // جلب جميع الفئات
-
-    return view('products.edit', compact('product', 'categories')); // تمرير المنتج والفئات إلى واجهة العرض
+    return redirect()->route('products.index')->with('success', 'Product added successfully.');
 }
 
 
+    public function edit($id)
+    {
+        // جلب المنتج الذي تريد تعديله مع الصور
+        $product = Product::with('productImages')->findOrFail($id);
+
+        return view('products.edit', compact('product'));
+    }
 
     public function update(Request $request, $id)
     {
+        // تحقق من صحة البيانات
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'image_path' => 'nullable|image', // الصورة اختيارية في التعديل
+        ]);
 
-        // $validatedData = $request->validate([
-        //     'status' => 'required',
-        // ]);
+        // جلب المنتج المراد تعديله
+        $product = Product::findOrFail($id);
+        $product->update($validatedData);
 
-        $product = product::findOrFail($id);
-       $product->name = $request->name;
-       $product->description = $request->description;
-       $product->price = $request->price;
-       $product->category_id = $request->category_id;
-       $product->save();
+        // في حالة رفع صورة جديدة
+        if ($request->hasFile('image_path')) {
+            // حذف الصورة القديمة
+            if ($product->productImages()->exists()) {
+                Storage::delete('public/' . $product->productImages->first()->image_path);
+                $product->productImages()->delete(); // حذف السجل القديم
+            }
 
-        return redirect()->route('products.index')->with('success', 'product updated successfully.');
+            // رفع الصورة الجديدة
+            $imagePath = $request->file('image_path')->store('product_images', 'public');
+            ProductImage::create([
+                'product_id' => $product->id,
+                'image_path' => $imagePath,
+            ]);
+        }
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
     public function destroy($id)
     {
-        $product = product::findOrFail($id);
+        // جلب المنتج المراد حذفه مع الصور
+        $product = Product::findOrFail($id);
+
+        // حذف الصور المرتبطة بالمنتج
+        if ($product->productImages()->exists()) {
+            Storage::delete('public/' . $product->productImages->first()->image_path);
+            $product->productImages()->delete();
+        }
+
+        // حذف المنتج
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'product deleted successfully.');
+
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 }
-

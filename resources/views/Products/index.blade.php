@@ -18,7 +18,8 @@
                 <th> Price </th>
                 <th> Category </th>
                 <th> Created At </th>
-                <th> Actions </th> <!-- عمود لإضافة الأزرار -->
+                <th> Image </th>
+                <th> Actions </th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,14 @@
                 <td> ${{ number_format($product->price, 2) }} </td>
                 <td> {{ $product->category->name ?? 'N/A' }} </td> <!-- عرض اسم الفئة أو N/A إن لم توجد -->
                 <td> {{ $product->created_at->format('M d, Y') }} </td>
+                <td>
+                    @if ($product->productImages->isNotEmpty())
+                        <img src="{{ asset('storage/' . $product->productImages->first()->image_path) }}" alt="Product Image" width="100">
+                    @else
+                        No Image
+                    @endif
+                </td>
+
                 <td>
                     <!-- أزرار الإجراءات -->
                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -47,5 +56,4 @@
     </table>
 </div>
 
-
-@endsection('content');
+@endsection
