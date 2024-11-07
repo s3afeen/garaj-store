@@ -7,17 +7,18 @@
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
-                        <a href="" class="nav-item nav-link">Headphones</a>
-                        <a href="" class="nav-item nav-link">Charger</a>
-                        <a href="" class="nav-item nav-link">Charger cable</a>
+                        <a href="/shop?category=5" class="nav-item nav-link">Headphones</a>
+                        <a href="/shop?category=6" class="nav-item nav-link">Charger</a>
+                        <a href="/shop?category=7" class="nav-item nav-link">Charger Cable</a>
+                        <a href="/shop?category=8" class="nav-item nav-link">Charger For Car</a>
                     </div>
                 </nav>
             </div>
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                     <a href="home" class="text-decoration-none d-block d-lg-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">KARAJ</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">STORE</span>
+                        <!-- <span class="h1 text-uppercase text-dark bg-light px-2">KARAJ</span>
+                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">STORE</span> -->
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>

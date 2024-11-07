@@ -54,10 +54,10 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        // جلب المنتج الذي تريد تعديله مع الصور
         $product = Product::with('productImages')->findOrFail($id);
+        $categories = Category::all();
 
-        return view('products.edit', compact('product'));
+        return view('products.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -110,4 +110,7 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
+
+
+
 }

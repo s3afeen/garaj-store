@@ -94,11 +94,7 @@ class CategoryController extends Controller
     }
 
 
+   
 
-        public function showLandingPage()
-    {
-        $categories = Category::all(); // جلب كل الأصناف
-        return view('userSide.landing', compact('categories'));
-    }
 
 }

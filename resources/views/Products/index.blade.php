@@ -29,7 +29,7 @@
                 <td>
                     <a href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
                 </td>
-                <td> {{ $product->description }} </td>
+                <td> {{ \Illuminate\Support\Str::limit($product->description, 50, '...') }} </td>
                 <td> ${{ number_format($product->price, 2) }} </td>
                 <td> {{ $product->category->name ?? 'N/A' }} </td> <!-- عرض اسم الفئة أو N/A إن لم توجد -->
                 <td> {{ $product->created_at->format('M d, Y') }} </td>

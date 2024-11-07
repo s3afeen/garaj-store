@@ -1,0 +1,56 @@
+<!-- Shop Detail Start -->
+<div class="container-fluid pb-5">
+    <div class="row px-xl-5">
+        <!-- Product Image Carousel -->
+        <div class="col-lg-5 mb-4">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner bg-light">
+                    @if(optional($product->images)->isNotEmpty())
+                        @foreach($product->images as $key => $image)
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                <img class="d-block w-100" src="{{ asset('storage/' . $image->path) }}" alt="Product Image">
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="{{ asset('img/default-image.jpg') }}" alt="Default Image">
+                        </div>
+                    @endif
+                </div>
+                <a class="carousel-control-prev" href="#product-carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#product-carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="col-lg-7 mb-4">
+            <div class="bg-light p-4 border">
+                <!-- Product Name -->
+                <h3 class="font-weight-bold">{{ $product->name }}</h3>
+
+                <!-- Product Rating and Reviews -->
+                <div class="d-flex align-items-center mb-3">
+                    <div class="text-warning mr-2">
+                        @for($i = 0; $i < 5; $i++)
+                            <small class="{{ $i < $product->rating ? 'fas fa-star' : 'far fa-star' }}"></small>
+                        @endfor
+                    </div>
+                    <small>({{ $product->reviews_count ?? 0 }} Reviews)</small>
+                </div>
+
+                <!-- Product Price -->
+                <h3 class="font-weight-bold text-success mb-4">${{ number_format($product->price, 2) }}</h3>
+
+                <!-- Product Description -->
+                <p class="mb-4">{{ $product->description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shop Detail End -->

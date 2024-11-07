@@ -14,6 +14,7 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserPageController;
 
 
 
@@ -50,9 +51,13 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('/', function () { return view('userSide.landing'); });
-Route::get('/home', function () { return view('userSide.landing'); });
-Route::get('/shop', function () { return view('userSide.shop'); });
+
+Route::get('/', [UserPageController::class, 'LandingPage'])->name('landing');
+Route::get('/home', [UserPageController::class, 'LandingPage'])->name('landing');
+Route::get('/shop', [UserPageController::class, 'shop'])->name('shop');
+
+// Route::get('/home', function () { return view('userSide.landing'); });
+// Route::get('/shop', function () { return view('userSide.shop'); });
 Route::get('/contact', function () { return view('userSide.contact'); });
 
 
@@ -60,9 +65,14 @@ Route::get('/contact', function () { return view('userSide.contact'); });
 
 
 
+// Route::get('/productDetails', function () { return view('userSide.productDetails'); });
+
+
+
+Route::get('/productDetails/{id}', [UserPageController::class, 'showProduct'])->name('product.details');
 
 
 
 
 
-Route::get('/', [CategoryController::class, 'showLandingPage'])->name('landing');
+
